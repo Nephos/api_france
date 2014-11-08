@@ -1,5 +1,6 @@
 module ApiFrance
   module DB
+    RESULTS_LIMIT = 1000
     DB_DIR = File.expand_path('db')
     MIGRATE_DIR = [DB_DIR, 'migrate'].join('/')
     DB_CONFIG_PATH = [DB_DIR, 'database.yml'].join('/')

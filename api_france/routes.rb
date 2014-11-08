@@ -4,9 +4,9 @@ module ApiFrance
 
   module Routes
     TABLES = {
-      regions: '/regions',
-      departments: '/departments',
-      towns: '/towns',
+      '/regions' => Region,
+      '/departments' => Department,
+      '/cities' => City,
     }
   end
 
@@ -14,8 +14,8 @@ module ApiFrance
     def self.url(request_uri)
       raise ArgumentError, 'request_uri must be a string' unless request_uri.is_a? String
       return {
-        table: URI.parse(request_uri).path
-        params: URI.parse(request_uri).query.split("&").map{|p|p.split('=')}.to_h
+        table: Routes::TABLES[URI.parse(request_uri).path],
+        params: URI.parse(request_uri).query.to_s.split("&").map{|p|p.split('=')}.to_h
       }
     end
   end
