@@ -1,0 +1,6 @@
+adapter:  mysql2
+database: api_france
+encoding: utf8
+username: root
+password: toor
+host:     localhost

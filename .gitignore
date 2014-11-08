@@ -1,0 +1,5 @@
+*~
+~*
+*.sw[po]
+*.project
+*.sqlite3
