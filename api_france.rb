@@ -3,17 +3,21 @@
 
 require 'rack'
 require 'active_record'
+require 'autoreload'
 
-require_relative 'api_france/db'
-require_relative 'api_france/city'
-require_relative 'api_france/department'
-require_relative 'api_france/region'
-require_relative 'api_france/routes'
-require_relative 'api_france/api'
-
-include ApiFrance
-
-if __FILE__ == $0
-  Rack::Server.start :app => ApiFrance::SERVER, :Port => 8080
-  # see http://localhost:8080/page?param_name=param_value
+autoreload(:interval=>1, :verbose=>true) do
+  begin
+    require_relative 'api_france/reload'
+    require_relative 'api_france/db'
+    require_relative 'api_france/city'
+    require_relative 'api_france/department'
+    require_relative 'api_france/region'
+    require_relative 'api_france/routes'
+    require_relative 'api_france/api'
+    #require_relative 'api_france/run'# if __FILE__ == $0
+  rescue => e
+    puts e.message, e.backtrace.join("\n")
+  end
 end
+
+require_relative 'api_france/run'
