@@ -14,7 +14,6 @@ autoreload(:interval=>1, :verbose=>true) do
     require_relative 'api_france/region'
     require_relative 'api_france/routes'
     require_relative 'api_france/api'
-    #require_relative 'api_france/run'# if __FILE__ == $0
   rescue => e
     puts e.message, e.backtrace.join("\n")
   end
