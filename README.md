@@ -15,15 +15,18 @@ Then, run ``ruby api_france.rb`` and go to `localhost:8080/cities?id=1` for exam
 The api will return a Json like :  
 ```json  
 {
-  "count" => nbresults,
-  "results" => {
-    "id" => {
+  "count" => nbr_of_results_total,
+  "results" => [
+    {
+      "id" =>
       "name" => ...
-      ...
+      ... => ...
     }
-  }
+  ]
 }
 ```
+
+The "count" is without limit. An empty search will return count = maxium but limit the results by 1000 elements (by default)
 
 "..." correspond to the values of the elements. There are :  
 * __cities__ id,name,zipcode,department_id,region_id  
