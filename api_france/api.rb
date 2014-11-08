@@ -3,10 +3,10 @@
 require 'pry'
 
 module ApiFrance
-  DB.connect!
   SERVER = lambda do |env|
     route = Parser.url(env['REQUEST_URI'].to_s)
     if route[:table]
+      DB.connect!
       r = route[:table].where(route[:params]).limit DB::RESULTS_LIMIT
       return [200, {}, [r.to_json]]
     else
