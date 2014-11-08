@@ -1,11 +1,5 @@
 #encoding: utf-8
 
-class String
-  def each
-    return self.each_char
-  end
-end
-
 module ApiFrance
 
   def self.api env
