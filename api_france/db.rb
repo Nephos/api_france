@@ -1,13 +1,7 @@
 module ApiFrance
   module DB
-    RESULTS_LIMIT = 1000
     DB_DIR = File.expand_path('db')
     MIGRATE_DIR = [DB_DIR, 'migrate'].join('/')
-    DB_CONFIG_PATH = [DB_DIR, 'database.yml'].join('/')
-
-    def self.load_config
-      @condig ||= YAML::load(File.open(DB_CONFIG_PATH))
-    end
 
     def self.dir!
       Dir.mkdir DB_DIR unless Dir.exists? DB_DIR
@@ -18,26 +12,26 @@ module ApiFrance
       dir!
       connect_off
       puts "create db"
-      ActiveRecord::Base.connection.create_database(load_config['database']) rescue nil
+      ActiveRecord::Base.connection.create_database(Configuration.all['database']) rescue nil
     end
 
     def self.drop!
       dir!
       connect_off
       puts "drop db"
-      ActiveRecord::Base.connection.drop_database(load_config['database']) rescue nil
+      ActiveRecord::Base.connection.drop_database(Configuration.all['database']) rescue nil
     end
 
     def self.connect_off
-      config = load_config
-      config[:database] = nil
+      Configuration.load!
+      Configuration.all[:database] = nil
       puts "connect off db"
       ActiveRecord::Base.establish_connection config
     end
 
     def self.connect!
       puts "connect db"
-      ActiveRecord::Base.establish_connection load_config
+      ActiveRecord::Base.establish_connection Configuration.all
     end
 
     def self.migrate!

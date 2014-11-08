@@ -9,6 +9,7 @@ autoreload(:interval=>1, :verbose=>true) do
   begin
     require_relative 'api_france/reload'
     require_relative 'api_france/db'
+    require_relative 'api_france/config'
     require_relative 'api_france/city'
     require_relative 'api_france/department'
     require_relative 'api_france/region'
