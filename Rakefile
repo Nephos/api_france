@@ -4,6 +4,7 @@ task :c do
   puts "Open ApiFrance Console..."
   include ApiFrance
   DB.connect!
+  # TODO: use simple irb with right configuration like rails
   require 'irb'
   require 'pry'
   Pry.start

@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 
+require 'pry'
 require 'rack'
 require 'active_record'
 require 'autoreload'

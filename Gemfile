@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'pry'
 gem 'rack'
-gem 'sqlite3'
+gem 'mysql2'
+gem 'yaml'
 gem 'autoreload'
