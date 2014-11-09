@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 module ApiFrance
   module DB
     DB_DIR = File.expand_path('db')

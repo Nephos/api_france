@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 def ApiFrance
   def self.reload!
     Object.send(:remove_const, :ProjectNamespace)
