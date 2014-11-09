@@ -29,7 +29,7 @@ The api will return a Json like :
 The "count" is without limit. An empty search will return count = maxium but limit the results by 1000 elements (by default)
 
 "..." correspond to the values of the elements. There are :  
-* __cities__ id,name,zipcode,department_id,region_id  
+* __cities__ id,name,zipcode,department_id,region_id,longitude,latitude  
 * __departments__ id,name,region_id  
 * __regions__ id,name  
 
