@@ -12,6 +12,7 @@ task :c do
 end
 
 task :s do
+  exec(File.expand_path('server.rb'), *ARGV[1..-1])
 end
 
 task :init do

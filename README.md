@@ -9,7 +9,7 @@ It can take a while (38k records).
 ## Running
 Then, run ``./serverrb`` and go to `localhost:8080/cities?id=1` for example.
 Parameters are :  
-* -p <port> : port to use
+* port <port> : port to use  
 
 You can also go to the console and try your code with ``rake c``
 
