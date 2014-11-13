@@ -1,4 +1,4 @@
-require_relative 'api_france'
+require_relative 'server'
 
 task :c do
   puts "Open ApiFrance Console..."
