@@ -5,8 +5,8 @@ class CreateCities < ActiveRecord::Migration
       t.string :zipcode, null: false
       t.string :department_id, :null => false, limit: 2
       t.integer :region_id, :null => false, limit: 1
-      t.decimal :longitude
-      t.decimal :latitude
+      t.float :longitude
+      t.float :latitude
     end
     add_index :cities, :name
     add_index :cities, :zipcode
