@@ -1,6 +1,17 @@
 #encoding: utf-8
 
 module ApiFrance
+
+  def self.parse_arg(name, argc=1)
+    i = ARGV.index name
+    return nil if i.nil?
+    return ARGV[i+1] if argc == 1
+    return ARGV[i+1..i+i]
+  end
+
   SERVER = lambda { |env| return api(env) }
-  STREAM = Rack::Server.start :app => SERVER, :Port => 8080 if $0 =~ /server.rb\Z/
+  if $0 =~ /server.rb\Z/
+    port = (parse_arg('-p') || 8080).to_i
+    STREAM = Rack::Server.start :app => SERVER, :Port => port
+  end
 end

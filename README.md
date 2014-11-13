@@ -7,7 +7,9 @@ Simply configure your ``db/database.yml`` and then run : ``rake create && rake m
 It can take a while (38k records).
 
 ## Running
-Then, run ``ruby api_france.rb`` and go to `localhost:8080/cities?id=1` for example.
+Then, run ``./serverrb`` and go to `localhost:8080/cities?id=1` for example.
+Parameters are :  
+* -p <port> : port to use
 
 You can also go to the console and try your code with ``rake c``
 
