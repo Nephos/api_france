@@ -6,6 +6,9 @@ require 'rack' # server
 require 'active_record' # models and migration
 require 'autoreload' # reload the server code during the running
 
+libs = `ls lib/*`.to_s.split("\n")
+libs.each{|lib| require_relative lib}
+
 autoreload(:interval=>1, :verbose=>true) do
   begin
     require_relative 'api_france/reload'
