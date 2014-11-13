@@ -49,6 +49,6 @@ The arguments can be a value of the tables :
 * ``E.g : http://api.local.dom/cities?id=1`` will return the first city of the table (id = 1)  
 * ``E.g : http://api.local.dom/department?name=var`` will return every department having their name = "var" (case insensitive)  
 
-## Api special parameters
+## Api special parameters
 You are also allowed to do research on the api via the following arguments :  
-* [not defined yet]
+* name_like : you can use this argument to do an advanced search through any table. The value of the parameter can have a '*' or '?' to replace (0+ / 1) other characters.

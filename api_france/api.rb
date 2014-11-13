@@ -10,6 +10,7 @@ module ApiFrance
       DB.connect!
       if (@request.column_names & params.keys.map(&:to_s)).empty?
         # special requests
+        @request = @request.api_search(params)
       else
         @request = @request.where(params.permit(@request.column_names))
       end

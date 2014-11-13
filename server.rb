@@ -11,12 +11,11 @@ libs.each{|lib| require_relative lib}
 
 autoreload(:interval=>1, :verbose=>true) do
   begin
-    require_relative 'api_france/reload'
-    require_relative 'api_france/db'
-    require_relative 'api_france/config'
-    require_relative 'api_france/city'
-    require_relative 'api_france/department'
-    require_relative 'api_france/region'
+    require_relative 'api_france/console'
+    require_relative 'api_france/db' # database actions
+    require_relative 'api_france/config' # configuration reader
+    require_relative 'api_france/searchable' # advanced search
+    Dir.entries('api_france/models/').select{|f| f[-3..-1] == '.rb'}.each{|f| require_relative "api_france/models/#{f}"}
     require_relative 'api_france/routes'
     require_relative 'api_france/api'
   rescue => e
