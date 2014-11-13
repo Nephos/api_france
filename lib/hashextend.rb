@@ -1,6 +1,6 @@
 module HashExtendPermissions
   def permit(*keys)
-    return self.keep_if{|k,v| keys.map(&:to_s).include? k.to_s}
+    return self.dup.keep_if{|k,v| keys.flatten.map(&:to_s).include? k.to_s}
   end
 end
 
