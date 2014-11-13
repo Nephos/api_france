@@ -1,6 +1,6 @@
 require_relative 'server'
 
-task :c do
+task :console do
   puts "Open ApiFrance Console..."
   include ApiFrance
   DB.connect!
@@ -10,56 +10,59 @@ task :c do
   Pry.start
   exit
 end
+task c: :console
 
-task :s do
+task :server do
   exec(File.expand_path('server.rb'), *ARGV[1..-1])
 end
+task s: :server
 
-task :init do
-  puts "ApiFrance : Init ..."
-  include ApiFrance
-  DB.create!
-  DB.connect!
-  DB.migrate!
-end
+namespace :db do
+  task :init do
+    puts "ApiFrance : Init ..."
+    include ApiFrance
+    DB.create!
+    DB.connect!
+    DB.migrate!
+  end
 
-task :create do
-  puts "ApiFrance : Create ..."
-  include ApiFrance
-  DB.create!
-end
+  task :create do
+    puts "ApiFrance : Create ..."
+    include ApiFrance
+    DB.create!
+  end
 
-task :recreate do
-  puts "ApiFrance : Recreate ... "
-  include ApiFrance
-  DB.drop! rescue nil
-  DB.create!
-end
+  task :recreate do
+    puts "ApiFrance : Recreate ... "
+    include ApiFrance
+    DB.drop! rescue nil
+    DB.create!
+  end
 
-task :drop do
-  puts "ApiFrance : Drop ..."
-  include ApiFrance
-  DB.drop! rescue nil
-end
+  task :drop do
+    puts "ApiFrance : Drop ..."
+    include ApiFrance
+    DB.drop! rescue nil
+  end
 
-task :reset do
-  puts "ApiFrance : Reset ..."
-  include ApiFrance
-  DB.drop! rescue nil
-  DB.create!
-  DB.connect!
-  DB.migrate!
-end
+  task :reset do
+    puts "ApiFrance : Reset ..."
+    include ApiFrance
+    DB.drop! rescue nil
+    DB.create!
+    DB.connect!
+    DB.migrate!
+  end
 
-desc 'Migrate the database through scripts in db/migrate. Target specific version with VERSION=x'
-task :migrate do
-  puts "ApiFrance : Migrate ..."
-  include ApiFrance
-  DB.connect!
-  DB.migrate!
-end
+  task :migrate do
+    puts "ApiFrance : Migrate ..."
+    include ApiFrance
+    DB.connect!
+    DB.migrate!
+  end
 
-task :seed do
-  puts "ApiFrance : Seed ..."
-  exec('ruby db/seed.rb')
+  task :seed do
+    puts "ApiFrance : Seed ..."
+    exec('ruby db/seed.rb')
+  end
 end

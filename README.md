@@ -3,15 +3,15 @@
 ApiFrance is a simple ruby application to serve an api with cities, regions, departments of France.
 
 ## Configuration
-Simply configure your ``db/database.yml`` and then run : ``rake create && rake migrate && rake seed``
+Simply configure your ``db/database.yml`` and then run : ``rake db:create && rake db:migrate && rake db:seed``
 It can take a while (38k records).
 
 ## Running
-Then, run ``./serverrb`` and go to `localhost:8080/cities?id=1` for example.
+Then, run ``rake server`` and go to `http://localhost:8080/cities?id=1` for example.
 Parameters are :  
 * port <port> : port to use  
 
-You can also go to the console and try your code with ``rake c``
+You can also go to the console and try your code with ``rake console``
 
 ## Work
 
