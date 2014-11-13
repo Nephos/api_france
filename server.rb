@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 
-require 'pry'
-require 'rack'
-require 'active_record'
-require 'autoreload'
+require 'pry' # the debugging library.
+require 'rack' # server
+require 'active_record' # models and migration
+require 'autoreload' # reload the server code during the running
 
 autoreload(:interval=>1, :verbose=>true) do
   begin
