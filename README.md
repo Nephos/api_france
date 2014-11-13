@@ -9,6 +9,8 @@ It can take a while (38k records).
 ## Running
 Then, run ``ruby api_france.rb`` and go to `localhost:8080/cities?id=1` for example.
 
+You can also go to the console and try your code with ``rake c``
+
 ## Work
 
 ## Api documentation
