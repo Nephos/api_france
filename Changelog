@@ -1,0 +1,7 @@
+v0.1
+  ** Creation **
+  ** Features **
+  - ApiServer listen a port / HTTP
+  - ApiServer provide limited access to the database
+  - ApiServer with advanced search
+  - ApiConsole to test
