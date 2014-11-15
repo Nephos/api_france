@@ -12,7 +12,8 @@ module ApiFrance
 
   module Parser
     def self.url(request_uri)
-      raise ArgumentError, 'request_uri must be a string' unless request_uri.is_a? String
+      #raise ArgumentError, 'request_uri must be a string' unless request_uri.is_a? String
+      request_uri = request_uri.to_s
       return {
         table: Routes::TABLES[URI.parse(request_uri).path],
         params: URI.parse(request_uri).query.to_s.split("&").map{|p|p.split('=')}.to_h,

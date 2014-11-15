@@ -2,21 +2,26 @@
 
 module ApiFrance
 
+  def self.get_http_results request
+    return {
+      count: request.count,
+      values: request.limit(Configuration.all['results_limit'])
+    }
+  end
+
   def self.api env
-    route = Parser.url env['REQUEST_URI'].to_s rescue return [500, {}, ['Internal Server Error']]
-    @request = route[:table]
+    (route = Parser.url(env['REQUEST_URI'])) rescue return [500, {}, ['Internal Server Error']]
+    request = route[:table]
     params = route[:params]
-    if @request
+    if request
       DB.connect!
-      if (@request.column_names & params.keys.map(&:to_s)).empty?
-        # special requests
-        @request = @request.api_search(params)
+      if params.permit(request.column_names).empty?
+        request = request.api_search(params)
       else
-        @request = @request.where(params.permit(@request.column_names))
+        request = request.where(params.permit(request.column_names))
       end
-      count = @request.count
-      results = @request.limit(Configuration.all['results_limit'])
-      return [200, {}, [{count: count, results: results}.to_json]]
+      results = get_http_results(request)
+      return [200, {}, [{count: results[:count], results: results[:values]}.to_json]]
     else
       return [404, {}, ['404 Not found']]
     end
