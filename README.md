@@ -53,4 +53,6 @@ The arguments can be a value of the tables :
 
 ## Api special parameters
 You are also allowed to do research on the api via the following arguments :  
-* name_like : you can use this argument to do an advanced search through any table. The value of the parameter can have a '*' or '?' to replace (0+ / 1) other characters.
+* name_like : you can use this argument to do an advanced search through any table. The value of the parameter can have a '*' or '?' to replace (0+ / 1) other characters.  
+* id_lesser / id_greater : search using the id. It is lesser or equal (not strict). Same for greater.  
+They can be combined.
