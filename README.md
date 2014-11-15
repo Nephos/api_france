@@ -2,18 +2,21 @@
 
 ApiFrance is a simple ruby application to serve an api with cities, regions, departments of France.
 
+
 ## Configuration
-Simply configure your ``db/database.yml`` and then run : ``rake db:create && rake db:migrate && rake db:seed``
-It can take a while (38k records).
+Simply configure your ``db/database.yml``.  
+Then, you can run the following commands ``rake db:init``  
+It can take a while (+36k records).  
+
 
 ## Running
 Then, run ``rake server`` and go to `http://localhost:8080/cities?id=1` for example.
 Parameters are :  
-* port <port> : port to use  
 
-You can also go to the console and try your code with ``rake console``
+* ``port <port>`` : port to use. Default is 8080  
 
-## Work
+You can also go to the console and try your code with ``rake console``  
+
 
 ## Api documentation
 The api will return a Json like :  
@@ -22,8 +25,8 @@ The api will return a Json like :
   "count" => nbr_of_results_total,
   "results" => [
     {
-      "id" =>
-      "name" => ...
+      "id" => id
+      "name" => name
       ... => ...
     }
   ]
@@ -38,7 +41,7 @@ The "count" is without limit. An empty search will return count = maxium but lim
 * __regions__ id,name  
 
 The api will not provide a full access to the data base. The number of result is basicaly limited by 1000.
-It can be configured in the configuration.yml
+It can be configured in the ``configuration.yml``
 
 
 ## Api parameters
@@ -47,13 +50,21 @@ The api can scan 3 tables : cities, regions, departments.
 So, the request must begin with on of theses.  
 * ``E.g : http://api.local.dom/cities?param=x&param2=y``  
 
+
 The arguments can be a value of the tables :  
 * ``E.g : http://api.local.dom/cities?id=1`` will return the first city of the table (id = 1)  
 * ``E.g : http://api.local.dom/department?name=var`` will return every department having their name = "var" (case insensitive)  
 
+
 ## Api special parameters
 You are also allowed to do research on the api via the following arguments :  
-* name_like : you can use this argument to do an advanced search through any table. The value of the parameter can have a '*' or '?' to replace (0+ / 1) other characters.  
+* name_like : you can use this argument to do an advanced search through any table. The value of the parameter can have a '*' or '?' to replace (0+ / 1) other characters.
+  ``E.g : http://api.local.dom/cities?name_like=pari?``  
+
 * id_lesser / id_greater : search using the id. It is lesser or equal (not strict). Same for greater.  
 They can be combined.  
+  ``E.g : http://api.local.dom/regions?id_lesser=4``  
+  ``E.g : http://api.local.dom/cities?id_greater=100&id_lesser=130``  
+
 * has_zipcode : when touching the cities table, this param will take every town having this zipcode. Muse be 5 digits length.
+  ``E.g : http://api.local.dom/cities?has_zipcode=75001``  
