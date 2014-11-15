@@ -58,7 +58,7 @@ The arguments can be a value of the tables :
 
 ## Api special parameters
 You are also allowed to do research on the api via the following arguments :  
-* name_like : you can use this argument to do an advanced search through any table. The value of the parameter can have a '*' or '?' to replace (0+ / 1) other characters.
+* name_like : you can use this argument to do an advanced search through any table. The value of the parameter can have a '*' or '?' to replace (0+ / 1) other characters.  
   ``E.g : http://api.local.dom/cities?name_like=pari?``  
 
 * id_lesser / id_greater : search using the id. It is lesser or equal (not strict). Same for greater.  
@@ -66,5 +66,5 @@ They can be combined.
   ``E.g : http://api.local.dom/regions?id_lesser=4``  
   ``E.g : http://api.local.dom/cities?id_greater=100&id_lesser=130``  
 
-* has_zipcode : when touching the cities table, this param will take every town having this zipcode. Muse be 5 digits length.
+* has_zipcode : when touching the cities table, this param will take every town having this zipcode. Muse be 5 digits length.  
   ``E.g : http://api.local.dom/cities?has_zipcode=75001``  
