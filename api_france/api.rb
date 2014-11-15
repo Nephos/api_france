@@ -11,15 +11,14 @@ module ApiFrance
 
   def self.api env
     (route = Parser.url(env['REQUEST_URI'])) rescue return [500, {}, ['Internal Server Error']]
-    request = route[:table]
+    table = route[:table]
     params = route[:params]
-    if request
+    if table
       DB.connect!
-      if params.permit(request.column_names).empty?
-        request = request.api_search(params)
-      else
-        request = request.where(params.permit(request.column_names))
-      end
+      permited_params = params.permit(table.column_names).except('zipcode')
+      request = (params.permit(permited_params).empty? ?
+                 table.api_search(route[:table], params) :
+                 table.where(permited_params))
       results = get_http_results(request)
       return [200, {}, [{count: results[:count], results: results[:values]}.to_json]]
     else
