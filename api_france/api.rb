@@ -9,25 +9,26 @@ module ApiFrance
     }
   end
 
-  CT_CHARSET = '; charset=UTF-8'
-  CT_TP = 'text/plain' + CT_CHARSET
-  CT_TJ = 'text/javascript' + CT_CHARSET
-  CT_TH = 'text/html' + CT_CHARSET
+  CA_CTRL = {'Cache-Control' => 'max-age=36000'}
+  CT_CHARSET_ = '; charset=UTF-8'
+  CT_TP = {'Content-type' => 'text/plain' + CT_CHARSET_}
+  CT_TJ = {'Content-type' => 'text/javascript' + CT_CHARSET_}
+  CT_TH = {'Content-type' => 'text/html' + CT_CHARSET_}
   def self.render params
     if params == :empty
-      return [204, {}, []]
+      return [204, CA_CTRL+CT_TP, [""]]
     elsif params[:status] == 404
-      return [404, {'Content-Type' => CT_TP}, ['Error 404 : Not found']]
+      return [404, CA_CTRL+CT_TP, ['Error 404 : Not found']]
     elsif params[:status] == 500
-      return [500, {'Content-Type' => CT_TP}, ['Error 5OO : Internal Server Error']]
+      return [500, CA_CTRL+CT_TP, ['Error 5OO : Internal Server Error']]
     elsif params[:status].is_a? Fixnum
-      return [params[:status], {'Content-Type' => CT_TP}, ["Error #{params[:status]}"]]
+      return [params[:status], CA_CTRL+CT_TP, ["Error #{params[:status]}"]]
     elsif params[:json]
-      return [200, {'Content-Type' => CT_TJ}, [params[:json]]]
+      return [200, CA_CTRL+CT_TJ, [params[:json]]]
     elsif params[:text]
-      return [200, {'Content-Type' => CT_TP}, [params[:text]]]
+      return [200, CA_CTRL+CT_TP, [params[:text]]]
     elsif params[:html]
-      return [200, {'Content-Type' => CT_TP}, [params[:html]]]
+      return [200, CA_CTRL+CT_TP, [params[:html]]]
     end
   end
 
