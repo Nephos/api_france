@@ -9,22 +9,30 @@ module ApiFrance
     }
   end
 
+  CT_CHARSET = '; charset=UTF-8'
+  CT_TP = 'text/plain' + CT_CHARSET
+  CT_TJ = 'text/javascript' + CT_CHARSET
+  CT_TH = 'text/html' + CT_CHARSET
   def self.render params
     if params == :empty
-      return [200, {}, []]
+      return [204, {}, []]
     elsif params[:status] == 404
-      return [404, {}, ['404 Not found']]
+      return [404, {'Content-Type' => CT_TP}, ['Error 404 : Not found']]
+    elsif params[:status] == 500
+      return [500, {'Content-Type' => CT_TP}, ['Error 5OO : Internal Server Error']]
+    elsif params[:status].is_a? Fixnum
+      return [params[:status], {'Content-Type' => CT_TP}, ["Error #{params[:status]}"]]
     elsif params[:json]
-      return [200, {}, [params[:json]]]
+      return [200, {'Content-Type' => CT_TJ}, [params[:json]]]
     elsif params[:text]
-      return [200, {}, [params[:text]]]
+      return [200, {'Content-Type' => CT_TP}, [params[:text]]]
     elsif params[:html]
-      return [200, {}, [params[:html]]]
+      return [200, {'Content-Type' => CT_TP}, [params[:html]]]
     end
   end
 
   def self.api env
-    (route = Parser.url(env['REQUEST_URI'])) rescue return [500, {}, ['Internal Server Error']]
+    (route = Parser.url(env['REQUEST_URI'])) rescue return render status: 500
     table = route[:table]
     params = route[:params]
     if table
@@ -37,7 +45,7 @@ module ApiFrance
       results = get_http_results(request)
       return render json: {count: results[:count], results: results[:values]}.to_json
     else
-      return render status: 404
+      return render :empty
     end
   end
 
