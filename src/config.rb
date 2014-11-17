@@ -14,13 +14,13 @@ module ApiFrance
       load_database!
     end
 
-    # Load a YAML file
+    # Load a YAML file
     def self.load_file(filename)
-      return YAML::load(File.open(filename)) if File.exists? filename
+      return YAML::load(File.open(filename)) || {} if File.exists? filename rescue return {}
       return {}
     end
 
-    # Load the config/configuration.yml
+    # Load the config/configuration.yml
     def self.load_conf!
       @@all = load_file(CONF_APP_PATH)
       @@all['results_limit'] = (@@all['results_limit'].to_s.to_i.zero? ? 1000 : @all['results_limit'].to_s.to_i)
@@ -48,5 +48,3 @@ module ApiFrance
 
   end
 end
-
-ApiFrance::Configuration.load!

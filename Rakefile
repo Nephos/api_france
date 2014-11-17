@@ -1,4 +1,8 @@
-require_relative 'server'
+load 'api_france'
+
+task :default do
+  puts "Choose an action, server, console, ..."
+end
 
 task :console do
   puts "Open ApiFrance Console..."
@@ -13,7 +17,7 @@ end
 task c: :console
 
 task :server do
-  exec(File.expand_path('server.rb'), *ARGV[1..-1])
+  exec(File.expand_path('api_france'), *ARGV[1..-1])
 end
 task s: :server
 

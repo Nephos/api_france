@@ -18,9 +18,9 @@ module ApiFrance
     if params == :empty
       return [204, CA_CTRL+CT_TP, [""]]
     elsif params[:status] == 404
-      return [404, CA_CTRL+CT_TP, ['Error 404 : Not found']]
+      return [404, CA_CTRL+CT_TP, ['Error 404 : Not found !']]
     elsif params[:status] == 500
-      return [500, CA_CTRL+CT_TP, ['Error 5OO : Internal Server Error']]
+      return [500, CA_CTRL+CT_TP, ['Error 5OO : Internal Server Error !']]
     elsif params[:status].is_a? Fixnum
       return [params[:status], CA_CTRL+CT_TP, ["Error #{params[:status]}"]]
     elsif params[:json]
