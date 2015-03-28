@@ -34,4 +34,3 @@ if $0 =~ /server.rb\Z/
   # http://www.rubydoc.info/gems/rack/Rack/Server#initialize-instance_method
   STREAM = Rack::Server.start :app => SERVER, :Port => port
 end
-
