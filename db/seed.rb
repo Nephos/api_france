@@ -1,6 +1,6 @@
 #encoding: utf-8
 require 'csv'
-require_relative '../server'
+require_relative '../api_france'
 
 include ApiFrance
 DB.connect!

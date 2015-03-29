@@ -29,7 +29,7 @@ end
 
 SERVER = lambda { |env| return ApiFrance.api(env) }
 
-if $0 =~ /server.rb\Z/
+if $0 == __FILE__
   port = (parse_arg('port') || 8080).to_i
   # http://www.rubydoc.info/gems/rack/Rack/Server#initialize-instance_method
   STREAM = Rack::Server.start :app => SERVER, :Port => port
